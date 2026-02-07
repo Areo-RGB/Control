@@ -1,0 +1,5 @@
+{
+  "name": "System Console",
+  "description": "A modern, dark-themed system console dashboard for monitoring live logs, system health, and other metrics.",
+  "requestFramePermissions": []
+}

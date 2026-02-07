@@ -1,0 +1,39 @@
+
+:host {
+    font-family: 'Manrope', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: block;
+    position: relative;
+}
+
+.glow-blue-bg {
+    filter: blur(80px);
+    background: radial-gradient(circle, rgba(13, 89, 242, 0.15) 0%, rgba(13, 89, 242, 0) 70%);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-underline {
+    position: relative;
+}
+
+.nav-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0d59f2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-underline.active::after {
+    opacity: 1;
+}

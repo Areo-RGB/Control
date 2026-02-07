@@ -1,0 +1,91 @@
+
+<section class="h-full flex flex-col gap-4 overflow-hidden">
+  <!-- Search & Filters -->
+  <div class="flex items-center gap-4 bg-[#0a0f1a] p-3 rounded-xl border border-border-dark">
+    <div class="flex-1 relative flex items-center">
+      <span class="material-symbols-outlined absolute left-4 text-text-dim">search</span>
+      <input class="w-full bg-transparent border border-border-dark focus:border-primary rounded-lg pl-12 pr-4 py-2.5 text-sm text-white placeholder-text-dim outline-none transition-all" placeholder="Search logs by keyword, process, or ID..." type="text" />
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="flex items-center gap-2 px-4 py-2.5 bg-surface-dark hover:bg-[#1a2333] border border-border-dark rounded-lg text-xs font-bold text-text-muted transition-all">
+        <span class="material-symbols-outlined text-sm">filter_list</span>
+        Log Level
+      </button>
+      <button class="flex items-center gap-2 px-4 py-2.5 bg-surface-dark hover:bg-[#1a2333] border border-border-dark rounded-lg text-xs font-bold text-text-muted transition-all">
+        <span class="material-symbols-outlined text-sm">calendar_today</span>
+        Time Range
+      </button>
+      <div class="h-8 w-[1px] bg-border-dark mx-1"></div>
+      <button (click)="togglePause()" class="p-2.5 text-text-muted hover:text-white" [class.text-primary]="isPaused()">
+        <span class="material-symbols-outlined">{{ isPaused() ? 'play_circle' : 'pause_circle' }}</span>
+      </button>
+      <button (click)="clearLogs()" class="p-2.5 text-text-muted hover:text-white">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+      <button class="p-2.5 text-text-muted hover:text-white">
+        <span class="material-symbols-outlined">download</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Log Card -->
+  <div class="flex-1 rounded-2xl border border-primary/20 flex flex-col overflow-hidden relative bg-gradient-to-b from-[#050A18] to-background-dark">
+    <!-- Stats Strip -->
+    <div class="flex items-center justify-between px-6 py-3 border-b border-primary/10 bg-primary/5">
+      <div class="flex gap-6">
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] text-text-dim uppercase tracking-wider font-bold">Throughput</span>
+          <span class="text-xs font-mono text-cyan-400">{{ throughput() }} events/s</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] text-text-dim uppercase tracking-wider font-bold">Storage</span>
+          <span class="text-xs font-mono text-primary">{{ storage() }} GB used</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] text-text-dim uppercase tracking-wider font-bold">Filter Active:</span>
+        <span class="text-xs text-white font-medium bg-primary/20 px-2 py-0.5 rounded border border-primary/30">None</span>
+      </div>
+    </div>
+
+    <!-- Log List -->
+    <div #logContainer class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-4">
+      @for (log of logs(); track log.timestamp) {
+        <div class="group flex items-start gap-4 hover:bg-white/5 p-2 -m-2 rounded-lg transition-colors border-l-2 border-transparent" [class]="getLogHoverBorderClass(log.level)">
+          <span class="font-mono text-[13px] text-text-dim whitespace-nowrap pt-1">{{ log.timestamp | date:'yyyy-MM-dd HH:mm:ss.SSS' }}</span>
+          <div class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-widest text-center" [class]="getLogLevelClasses(log.level)">{{ log.level }}</div>
+          <div class="flex-1">
+            <p class="font-mono text-[13px] leading-relaxed" [class.text-white]="log.level !== 'ERROR'" [class.text-red-400]="log.level === 'ERROR'" [innerHTML]="log.message"></p>
+            @if (log.details) {
+              <div class="mt-2 p-3 bg-red-500/10 rounded border border-red-500/20 text-[12px] font-mono text-red-300" [innerHTML]="log.details.raw">
+              </div>
+            }
+          </div>
+          <span class="material-symbols-outlined text-text-dim opacity-0 group-hover:opacity-100 cursor-pointer text-lg">content_copy</span>
+        </div>
+      }
+      <!-- Typing Indicator for live feeling -->
+      @if (!isPaused()) {
+        <div class="flex items-center gap-2 py-4">
+            <div class="flex gap-1">
+                <div class="size-1.5 bg-primary rounded-full animate-bounce"></div>
+                <div class="size-1.5 bg-primary rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                <div class="size-1.5 bg-primary rounded-full animate-bounce [animation-delay:0.4s]"></div>
+            </div>
+            <span class="text-[11px] font-mono text-text-dim uppercase tracking-widest italic">Waiting for events...</span>
+        </div>
+      }
+    </div>
+
+    <!-- Log Footer Actions -->
+    <div class="p-4 border-t border-primary/10 bg-background-dark/50 backdrop-blur-sm flex justify-between items-center">
+      <div class="flex gap-2">
+        <span class="text-[10px] font-bold bg-surface-dark px-2 py-1 rounded text-text-dim border border-border-dark">CMD + F Search</span>
+        <span class="text-[10px] font-bold bg-surface-dark px-2 py-1 rounded text-text-dim border border-border-dark">ESC Clear</span>
+      </div>
+      <div class="text-[11px] text-text-dim">
+        Showing <span class="text-white">{{ logs().length }}</span> events
+      </div>
+    </div>
+  </div>
+</section>

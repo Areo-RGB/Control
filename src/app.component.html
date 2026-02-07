@@ -1,0 +1,19 @@
+
+@if (activeView() === 'Dashboard') {
+  <app-control-center (navChange)="onNavChange($event)"></app-control-center>
+} @else {
+  <div class="relative flex h-screen w-full flex-col bg-background-dark">
+    <app-header [activeView]="activeView()" (navChange)="onNavChange($event)"></app-header>
+    <div class="flex flex-1 overflow-hidden">
+      <app-sidebar [activeView]="activeView()" (navChange)="onNavChange($event)"></app-sidebar>
+      <main class="flex-1 bg-black overflow-hidden relative p-6">
+        @if (activeView() === 'Logs' || activeView() === 'Live Logs') {
+          <app-live-logs></app-live-logs>
+        } @else {
+          <app-dashboard [viewName]="activeView()"></app-dashboard>
+        }
+      </main>
+    </div>
+    <app-footer></app-footer>
+  </div>
+}

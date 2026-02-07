@@ -1,0 +1,61 @@
+
+<aside class="w-72 flex flex-col justify-between p-6 border-r border-border-dark bg-background-dark/50">
+  <div class="flex flex-col gap-8">
+    <div class="space-y-2">
+      <label class="text-[10px] font-bold text-text-dim uppercase tracking-[0.2em] px-3">NAVIGATION</label>
+      <div class="flex flex-col gap-1">
+        @for(item of navItems(); track item.name) {
+          <div 
+            (click)="setActive(item.name)"
+            class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer group"
+            [class.bg-surface-dark]="activeNavItem() === item.name"
+            [class.text-white]="activeNavItem() === item.name"
+            [class.text-text-muted]="activeNavItem() !== item.name"
+            [class.hover:bg-surface-dark]="activeNavItem() !== item.name"
+            [class.hover:text-white]="activeNavItem() !== item.name"
+            >
+            <span 
+              class="material-symbols-outlined transition-colors"
+              [class.text-primary]="activeNavItem() === item.name"
+              [class.group-hover:text-primary]="activeNavItem() !== item.name"
+              [style.font-variation-settings]="(activeNavItem() === item.name && item.filledIcon) ? '\'FILL\' 1' : ''">
+              {{item.icon}}
+            </span>
+            <span class="text-sm" [class.font-bold]="activeNavItem() === item.name" [class.font-medium]="activeNavItem() !== item.name">
+              {{item.name}}
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="space-y-4 px-3">
+      <label class="text-[10px] font-bold text-text-dim uppercase tracking-[0.2em]">SYSTEM HEALTH</label>
+      <div class="space-y-4">
+        <div>
+          <div class="flex justify-between text-[11px] mb-2">
+            <span class="text-text-muted">CPU Usage</span>
+            <span class="text-white font-mono">{{ cpuUsage() }}%</span>
+          </div>
+          <div class="h-1 w-full bg-surface-dark rounded-full overflow-hidden">
+            <div class="h-full bg-primary rounded-full" [style.width.%]="cpuUsage()"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-[11px] mb-2">
+            <span class="text-text-muted">Memory Usage</span>
+            <span class="text-white font-mono">{{ memoryUsage() }}GB / {{ totalMemory() }}GB</span>
+          </div>
+          <div class="h-1 w-full bg-surface-dark rounded-full overflow-hidden">
+            <div class="h-full bg-primary rounded-full" [style.width.%]="memoryUsagePercentage()"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pt-6">
+    <button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl transition-all glow-blue group active:scale-[0.98]">
+      <span class="material-symbols-outlined">add</span>
+      <span class="text-sm">New Query</span>
+    </button>
+  </div>
+</aside>

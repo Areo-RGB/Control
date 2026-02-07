@@ -1,0 +1,198 @@
+
+<div class="fixed top-[-10%] left-[-5%] w-[40%] h-[40%] glow-blue-bg pointer-events-none"></div>
+<div class="fixed bottom-[-10%] right-[-5%] w-[50%] h-[50%] glow-blue-bg pointer-events-none"></div>
+<div class="fixed top-[40%] left-[30%] w-[30%] h-[30%] glow-blue-bg pointer-events-none opacity-50"></div>
+<div class="relative flex min-h-screen w-full flex-col font-display">
+  <header class="flex items-center justify-between px-12 py-8 bg-transparent sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <div class="bg-primary p-2 rounded-lg">
+        <span class="material-symbols-outlined text-white text-2xl">dashboard</span>
+      </div>
+      <h1 class="text-xl font-extrabold tracking-tight uppercase">Control Center</h1>
+    </div>
+    <nav class="flex items-center gap-12">
+      @for(item of navItems(); track item) {
+        <a 
+          (click)="setActive(item)"
+          href="#"
+          class="text-sm font-semibold tracking-wide transition-colors nav-underline"
+          [class.active]="activeNavItem() === item"
+          [class.text-white/60]="activeNavItem() !== item"
+          [class.hover:text-white]="activeNavItem() !== item"
+          [class.text-white]="activeNavItem() === item">
+          {{item}}
+        </a>
+      }
+    </nav>
+    <div class="flex items-center gap-6">
+      <button class="flex items-center justify-center size-10 rounded-full border border-white/10 hover:border-primary/50 transition-all">
+        <span class="material-symbols-outlined text-[20px]">notifications</span>
+      </button>
+      <div class="h-10 w-[1px] bg-white/10"></div>
+      <div class="flex items-center gap-3">
+        <div class="text-right">
+          <p class="text-xs font-bold leading-none">Alex Rivera</p>
+          <p class="text-[10px] text-white/40 leading-none mt-1 uppercase tracking-widest">Admin</p>
+        </div>
+        <div class="size-10 rounded-full bg-cover bg-center border border-white/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDI7_6Mt6S7ZNQiKmRb8IFhC0yEQRJgznLRN-jGcFKomGb6qpdBu-eBVXWLhHKP0Kx3ZabzBBtsgCH0ybS1BI6DS73h2kNWEaM6Z7FAIgW09LCGcMnuvKciyVJUBdGyZH2N1b-8S5hh5YjUWH-5xmeqSsEmzcCQ9EH94Youwbm1tcCVvtWFezX3WRXjjmEyxAerqaXmqM-jdcrwFLnM8A4lsAzTXX6bvW1EILKUFYl0DBkDJlSj6QHaE35BvQu7MOSPRvAeQ4G-Ub8w");'></div>
+      </div>
+    </div>
+  </header>
+  <main class="flex-1 px-12 pb-20 space-y-6 max-w-[1600px] mx-auto w-full">
+    <section class="grid grid-cols-3 gap-6">
+      <div class="glass-card rounded-xl p-10">
+        <p class="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">Total Throughput</p>
+        <div class="flex items-baseline gap-4 mt-2">
+          <h2 class="text-6xl font-extrabold tracking-tighter">1.2</h2>
+          <span class="text-2xl font-light text-white/60">TB/s</span>
+          <div class="flex items-center gap-1 text-primary bg-primary/10 px-2 py-0.5 rounded ml-2">
+            <span class="material-symbols-outlined text-sm font-bold">trending_up</span>
+            <span class="text-xs font-bold">+12.4%</span>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card rounded-xl p-10">
+        <p class="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">System Health</p>
+        <div class="flex items-baseline gap-4 mt-2">
+          <h2 class="text-6xl font-extrabold tracking-tighter">99.9</h2>
+          <span class="text-2xl font-light text-white/60">%</span>
+          <div class="flex items-center gap-1 text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded ml-2">
+            <span class="material-symbols-outlined text-sm font-bold">check_circle</span>
+            <span class="text-xs font-bold">Stable</span>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card rounded-xl p-10">
+        <p class="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">Active Nodes</p>
+        <div class="flex items-baseline gap-4 mt-2">
+          <h2 class="text-6xl font-extrabold tracking-tighter">482</h2>
+          <span class="text-2xl font-light text-white/60">Units</span>
+          <div class="flex items-center gap-1 text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded ml-2">
+            <span class="material-symbols-outlined text-sm font-bold">warning</span>
+            <span class="text-xs font-bold">-2 Nodes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="grid grid-cols-3 gap-6">
+      <div class="glass-card rounded-xl p-10">
+        <p class="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">Network Latency</p>
+        <div class="flex items-baseline gap-4 mt-2">
+          <h2 class="text-6xl font-extrabold tracking-tighter">14</h2>
+          <span class="text-2xl font-light text-white/60">ms</span>
+          <div class="flex items-center gap-1 text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded ml-2">
+            <span class="material-symbols-outlined text-sm font-bold">speed</span>
+            <span class="text-xs font-bold">Optimal</span>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card rounded-xl p-10">
+        <p class="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">Request Volume</p>
+        <div class="flex items-baseline gap-4 mt-2">
+          <h2 class="text-6xl font-extrabold tracking-tighter">8.4</h2>
+          <span class="text-2xl font-light text-white/60">M/min</span>
+          <div class="flex items-center gap-1 text-primary bg-primary/10 px-2 py-0.5 rounded ml-2">
+            <span class="material-symbols-outlined text-sm font-bold">trending_up</span>
+            <span class="text-xs font-bold">+8.1%</span>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card rounded-xl p-10">
+        <p class="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">Database Load</p>
+        <div class="flex items-baseline gap-4 mt-2">
+          <h2 class="text-6xl font-extrabold tracking-tighter">62</h2>
+          <span class="text-2xl font-light text-white/60">%</span>
+          <div class="flex items-center gap-1 text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded ml-2">
+            <span class="material-symbols-outlined text-sm font-bold">database</span>
+            <span class="text-xs font-bold">Healthy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="grid grid-cols-3 gap-6">
+      <div class="glass-card rounded-xl p-10">
+        <p class="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">CPU Utilization</p>
+        <div class="flex items-baseline gap-4 mt-2">
+          <h2 class="text-6xl font-extrabold tracking-tighter">45</h2>
+          <span class="text-2xl font-light text-white/60">%</span>
+          <div class="flex items-center gap-1 text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded ml-2">
+            <span class="material-symbols-outlined text-sm font-bold">memory</span>
+            <span class="text-xs font-bold">Nominal</span>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card rounded-xl p-10">
+        <p class="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">Memory Usage</p>
+        <div class="flex items-baseline gap-4 mt-2">
+          <h2 class="text-6xl font-extrabold tracking-tighter">78</h2>
+          <span class="text-2xl font-light text-white/60">%</span>
+          <div class="flex items-center gap-1 text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded ml-2">
+            <span class="material-symbols-outlined text-sm font-bold">analytics</span>
+            <span class="text-xs font-bold">Elevated</span>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card rounded-xl p-10">
+        <p class="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">Storage Capacity</p>
+        <div class="flex items-baseline gap-4 mt-2">
+          <h2 class="text-6xl font-extrabold tracking-tighter">2.4</h2>
+          <span class="text-2xl font-light text-white/60">PB</span>
+          <div class="flex items-center gap-1 text-white/20 bg-white/5 px-2 py-0.5 rounded ml-2">
+            <span class="material-symbols-outlined text-sm font-bold">storage</span>
+            <span class="text-xs font-bold">82% Used</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="space-y-6 pt-6">
+      <div class="flex items-center justify-between px-2">
+        <h3 class="text-2xl font-bold tracking-tight">Command Console</h3>
+        <div class="flex gap-2">
+          <span class="bg-white/5 border border-white/10 px-3 py-1 rounded text-[10px] font-mono text-white/40 italic">SESSION: RD-492-AX</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-4 gap-6">
+        <button class="group relative flex flex-col items-center justify-center gap-4 bg-primary rounded-xl py-12 px-6 transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(13,89,242,0.4)]">
+          <span class="material-symbols-outlined text-4xl">rocket_launch</span>
+          <div class="text-center">
+            <p class="font-bold text-lg">Deploy Update</p>
+            <p class="text-white/70 text-xs mt-1">Push build v2.4.1 to nodes</p>
+          </div>
+          <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </div>
+        </button>
+        <button class="group relative flex flex-col items-center justify-center gap-4 glass-card rounded-xl py-12 px-6 transition-all hover:bg-white/10">
+          <span class="material-symbols-outlined text-4xl text-white/60 group-hover:text-white transition-colors">cleaning_services</span>
+          <div class="text-center">
+            <p class="font-bold text-lg">Clear Cache</p>
+            <p class="text-white/40 text-xs mt-1">Purge CDN & local buffers</p>
+          </div>
+        </button>
+        <button class="group relative flex flex-col items-center justify-center gap-4 glass-card rounded-xl py-12 px-6 transition-all hover:bg-white/10">
+          <span class="material-symbols-outlined text-4xl text-white/60 group-hover:text-white transition-colors">restart_alt</span>
+          <div class="text-center">
+            <p class="font-bold text-lg">System Reboot</p>
+            <p class="text-white/40 text-xs mt-1">Sequential node restart</p>
+          </div>
+        </button>
+        <button class="group relative flex flex-col items-center justify-center gap-4 glass-card rounded-xl py-12 px-6 transition-all hover:bg-white/10">
+          <span class="material-symbols-outlined text-4xl text-white/60 group-hover:text-white transition-colors">policy</span>
+          <div class="text-center">
+            <p class="font-bold text-lg">Security Scan</p>
+            <p class="text-white/40 text-xs mt-1">Run deep vulnerability audit</p>
+          </div>
+        </button>
+      </div>
+    </section>
+  </main>
+  <footer class="px-12 py-10 flex justify-between items-center text-[10px] text-white/20 tracking-[0.3em] uppercase border-t border-white/5 mx-auto w-full max-w-[1600px]">
+    <div>© 2024 NEXUS SYSTEMS INTERFACE</div>
+    <div class="flex gap-8">
+      <a href="#" class="hover:text-primary transition-colors">Documentation</a>
+      <a href="#" class="hover:text-primary transition-colors">API Keys</a>
+      <a href="#" class="hover:text-primary transition-colors">System Logs</a>
+    </div>
+    <div>STATUS: <span class="text-emerald-500">NOMINAL</span></div>
+  </footer>
+</div>
