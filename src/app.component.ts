@@ -1,5 +1,6 @@
 
 import { Component, ChangeDetectionStrategy, signal, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -12,6 +13,7 @@ import { ControlCenterComponent } from './components/control-center/control-cent
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    CommonModule,
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
